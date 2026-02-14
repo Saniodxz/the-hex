@@ -10,6 +10,7 @@ let staticAnimId = null;
 let particleTimer = null;
 let heartTimer = null;
 let sparkleTimer = null;
+let jokeTimer = null;
 
 // === DOM References ===
 const $ = (id) => document.getElementById(id);
@@ -32,6 +33,7 @@ const particlesEl    = $('particles');
 const heartsEl       = $('hearts-container');
 const sparklesEl     = $('sparkles');
 const crackSvg       = $('crack-svg');
+const jokesEl        = $('jokes-container');
 
 // === Initialize ===
 init();
@@ -105,7 +107,7 @@ function enterStage1() {
     state = 1;
     body.className = 'stage-1';
 
-    titleEl.textContent = 'Hag\u2026';
+    titleEl.textContent = 'Hagatha\u2026';
     subtitleEl.textContent = 'Will you be my Valentine?';
     yesBtn.textContent = 'YES \u2764\uFE0F';
     yesBtn.style.display = '';
@@ -125,8 +127,8 @@ function enterStage2() {
     body.className = 'stage-2';
     stopStatic();
 
-    titleEl.textContent = 'Hag\u2026';
-    subtitleEl.textContent = 'Are you absolutely certain, Hag?';
+    titleEl.textContent = 'Hagatha\u2026';
+    subtitleEl.textContent = 'Are you absolutely certain, Hagatha?';
     yesBtn.textContent = 'Yes, obviously.';
     noBtn.textContent = "I\u2019m reconsidering\u2026";
     noBtn.className = 'btn btn-no';
@@ -145,7 +147,7 @@ function enterStage3() {
     state = 3;
     body.className = 'stage-3';
 
-    titleEl.textContent = 'Hag\u2026';
+    titleEl.textContent = 'Hagatha\u2026';
     subtitleEl.textContent = 'So you choose this reality\u2026 with me?';
     yesBtn.textContent = 'YES \u2764\uFE0F';
     noBtn.style.display = 'none';
@@ -386,6 +388,48 @@ function stopSparkles() {
     }
 }
 
+// === Floating Inside Jokes ===
+function startJokes() {
+    var jokes = [
+        'you make my benjamin so brrrrr',
+        'SQUISHYYYYYYYYY',
+        'Honk Honk Bell',
+        'honk honk beau',
+        'SUCK ON THAT PYRAS'
+    ];
+    var idx = 0;
+
+    function spawn() {
+        var el = document.createElement('div');
+        el.className = 'floating-joke';
+        el.textContent = jokes[idx % jokes.length];
+        idx++;
+        var size = 0.75 + Math.random() * 0.4;
+        var dur = 7 + Math.random() * 5;
+        var rotate = -6 + Math.random() * 12;
+        el.style.setProperty('--size', size + 'rem');
+        el.style.setProperty('--duration', dur + 's');
+        el.style.setProperty('--rotate', rotate + 'deg');
+        el.style.left = Math.random() * 80 + '%';
+        jokesEl.appendChild(el);
+        setTimeout(function() { el.remove(); }, dur * 1000);
+    }
+
+    // Initial staggered burst
+    for (var i = 0; i < 3; i++) {
+        setTimeout(spawn, i * 800);
+    }
+
+    jokeTimer = setInterval(spawn, 2500);
+}
+
+function stopJokes() {
+    if (jokeTimer) {
+        clearInterval(jokeTimer);
+        jokeTimer = null;
+    }
+}
+
 // === Final Sequence ===
 function triggerFinalSequence() {
     // 1. Red flash
@@ -414,9 +458,10 @@ function triggerFinalSequence() {
             // 5. Show final screen
             finalScreen.classList.add('visible');
 
-            // 6. Start hearts & sparkles
+            // 6. Start hearts, sparkles & jokes
             startHearts();
             startSparkles();
+            startJokes();
 
             // 7. Reveal final lines with stagger
             var lines = document.querySelectorAll('.final-line');
