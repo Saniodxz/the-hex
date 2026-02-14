@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Hex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="tv-frame">
+            <div class="tv-static-bar"></div>
+            <p id="broadcast-text"></p>
+            <div class="loading-dots">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TV Static Overlay -->
+    <canvas id="static-canvas"></canvas>
+
+    <!-- Scanlines -->
+    <div id="scanlines"></div>
+
+    <!-- Vignette -->
+    <div id="vignette"></div>
+
+    <!-- Glitch Overlay -->
+    <div id="glitch-overlay"></div>
+
+    <!-- Crack Overlay -->
+    <div id="crack-overlay">
+        <svg id="crack-svg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <!-- Magic Burst -->
+    <div id="magic-burst"></div>
+
+    <!-- Particles Container -->
+    <div id="particles"></div>
+
+    <!-- Hearts Container -->
+    <div id="hearts-container"></div>
+
+    <!-- Sparkles Container -->
+    <div id="sparkles"></div>
+
+    <!-- Main Content -->
+    <div id="content">
+        <h1 id="title">Hag&hellip;</h1>
+        <p id="subtitle">Will you be my Valentine?</p>
+        <div id="button-container">
+            <button id="yes-btn" class="btn btn-yes">YES &#10084;&#65039;</button>
+            <button id="no-btn" class="btn btn-no">No.</button>
+        </div>
+    </div>
+
+    <!-- Final Message -->
+    <div id="final-screen">
+        <div id="final-content">
+            <p class="final-line line-1">You are my favourite universe.</p>
+            <p class="final-line line-2">And I&rsquo;d choose you in every reality.</p>
+            <p class="final-line line-3 accent">Happy Valentine&rsquo;s Day, Hag &#10084;&#65039;</p>
+            <div class="signature-block">
+                <p class="signature">Love, Sanio.</p>
+                <button id="confirmed-btn">Confirmed.</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
